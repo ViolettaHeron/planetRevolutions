@@ -18,9 +18,9 @@ function drawStars(can){
 
 		ctx.fillStyle = starsColor;
 		var x=Math.random()*maxWidth, y=Math.random()*maxHeight;
-		var l=Math.random()<0.99?Math.random()*2:Math.random()*4;
+		var l=Math.random()<0.999?Math.random()*1.5+0.5:Math.random()*3+1;
 
-		ctx.fillRect(x,y,l,l);
+		ctx.fillRect(x,y,l,l);		
 	}
 
 
