@@ -8,7 +8,6 @@ function init(){
 function drawStars(can){
 	var ctx = can.getContext("2d");
 	
-
 	var maxHeight = can.height;
 	var maxWidth = can.width;
 
@@ -21,8 +20,23 @@ function drawStars(can){
 		var l=Math.random()<0.999?Math.random()*1.5+0.5:Math.random()*3+1;
 
 		ctx.fillRect(x,y,l,l);		
-	}
 
+	}
+	ctx.fillStyle = "#ffffff";
+
+	var scale = 0.35;
+	ctx.lineWidth = 1;
+	ctx.strokeStyle = 'white';
+
+	for(var i = 0;i<9;i++){
+		ctx.save();
+		ctx.scale(1, scale);
+		ctx.beginPath();
+		ctx.arc((maxWidth/2), (maxHeight/2)/scale, (55+30*i), 2 * Math.PI, 0, false);
+		ctx.stroke();
+		ctx.restore();
+		//scale -= 0.02;
+	}
 
 	console.log(starsColor);
 
