@@ -32,12 +32,10 @@ function drawStars(can){
 		ctx.save();
 		ctx.scale(1, scale);
 		ctx.beginPath();
-		ctx.arc((maxWidth/2), (maxHeight/2)/scale, (55+30*i), 2 * Math.PI, 0, false);
+		ctx.arc((maxWidth/2), (maxHeight/2)/scale, (100+40*i), 2 * Math.PI, 0, false);
 		ctx.stroke();
 		ctx.restore();
 		//scale -= 0.02;
 	}
-
-	console.log(starsColor);
 
 }
