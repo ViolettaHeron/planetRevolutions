@@ -57,11 +57,9 @@ function drawStars(can){
 */
 function addEvents(can){
 	window.addEventListener('resize', function(){
-		if(window.innerWidth >= 320 && window.innerHeight >= 480){
-			nbStars = (window.innerHeight/100*window.innerWidth/10);
-			putSize(can);
-			drawStars(can);
-		}
+		nbStars = (window.innerHeight/100*window.innerWidth/10);
+		putSize(can);
+		drawStars(can);
 	}
 	, true);
 }
