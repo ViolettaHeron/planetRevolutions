@@ -4,6 +4,7 @@ function init(){
 	var can = document.getElementById('sky')
 	putSize(can);
 	drawStars(can);
+	drawPlanets(can);
 	addEvents(can);
 }
 
@@ -45,10 +46,21 @@ function drawStars(can){
 		ctx.beginPath();
 		ctx.arc((maxWidth/2), (maxHeight/2)/scale, (initialWidth+gap*i), 2 * Math.PI, 0, false);
 		ctx.stroke();
+		ctx.closePath();
 		ctx.restore();
-		//scale -= 0.02;
 	}
 
+}
+
+
+function drawPlanets(can){
+	var ctx = can.getContext("2d");
+	var size = can.width/30
+
+	ctx.beginPath();
+	ctx.fillStyle = "#FFFFC4";
+	ctx.fillRect((can.width/2)-size/2, (can.height/2)-size/2, size, size);
+	ctx.closePath();
 }
 
 
@@ -60,6 +72,8 @@ function addEvents(can){
 		nbStars = (window.innerHeight/100*window.innerWidth/10);
 		putSize(can);
 		drawStars(can);
+		drawPlanets(can);
 	}
 	, true);
 }
+
