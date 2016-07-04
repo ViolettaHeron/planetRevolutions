@@ -1,3 +1,8 @@
+body{
+	margin:0;
+	padding:0;
+}
+
 #sky{
 	background-color:#040812;
 }

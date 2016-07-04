@@ -2,7 +2,14 @@ var nbStars = 1000;
 
 function init(){
 	var can = document.getElementById('sky')
+	putSize(can);
 	drawStars(can);
+	addEvents(can);
+}
+
+function putSize(can){
+	can.height = window.innerHeight;
+	can.width = window.innerWidth;
 }
 
 function drawStars(can){
@@ -10,6 +17,10 @@ function drawStars(can){
 	
 	var maxHeight = can.height;
 	var maxWidth = can.width;
+
+
+	var initialWidth = can.width/12;
+	var gap = ((can.width-initialWidth)/2)/10
 
 	for(var i = 0;i<nbStars;i++){
 		var hue=Math.floor(Math.random()*45+173), sat=Math.floor(Math.random()*10+56),lum=Math.floor(Math.random()*20+80)
@@ -32,10 +43,22 @@ function drawStars(can){
 		ctx.save();
 		ctx.scale(1, scale);
 		ctx.beginPath();
-		ctx.arc((maxWidth/2), (maxHeight/2)/scale, (100+40*i), 2 * Math.PI, 0, false);
+		ctx.arc((maxWidth/2), (maxHeight/2)/scale, (initialWidth+gap*i), 2 * Math.PI, 0, false);
 		ctx.stroke();
 		ctx.restore();
 		//scale -= 0.02;
 	}
 
+}
+
+
+/*
+* events
+*/
+function addEvents(can){
+	window.addEventListener('resize', function(){
+		putSize(can);
+		drawStars(can);
+	}
+	, true);
 }
