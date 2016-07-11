@@ -5,7 +5,7 @@ function init(){
 	putSize(can);
 	drawStars(can);
 	drawPlanets(can);
-	drawTarget(can);
+	//drawTarget(can);
 	addEvents(can);
 }
 
@@ -74,16 +74,20 @@ function drawPlanets(can){
 	var maxHeight = can.height;
 	var maxWidth = can.width;
 
-	var t = 2*Math.PI;
-	var x = (maxWidth/2)+4*Math.cos(t)*size;		// 4=magic number
-	var y = (maxHeight/2)+4*Math.sin(t)*size;		// 4=magic number
-	console.log(maxHeight,maxWidth,x,y);
+	
 
-	ctx.beginPath();
-	ctx.fillStyle = "#FFFFC4";
-	ctx.arc(x, y, size, 0, 2 * Math.PI, false);
-	ctx.fill()
-	ctx.closePath();
+	for(var i=0;i<9;i++){
+		var x = (maxWidth/2)+(4+i)*Math.cos(t)*size;		// 4=magic number
+		var y = (maxHeight/2)+(4+i)*Math.sin(t)*size;		// 4=magic number
+
+		var t = 2*Math.PI+0.5*i;
+
+		ctx.beginPath();
+		ctx.fillStyle = "#FFFFC4";
+		ctx.arc(x, y, size, 0, 2 * Math.PI, false);
+		ctx.fill()
+		ctx.closePath();
+	}
 }
 
 
