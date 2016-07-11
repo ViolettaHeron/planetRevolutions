@@ -5,6 +5,7 @@ function init(){
 	putSize(can);
 	drawStars(can);
 	drawPlanets(can);
+	drawTarget(can);
 	addEvents(can);
 }
 
@@ -19,10 +20,6 @@ function drawStars(can){
 	var maxHeight = can.height;
 	var maxWidth = can.width;
 
-
-	var initialWidth = can.width/12;
-	var gap = ((can.width-initialWidth)/2)/10
-
 	for(var i = 0;i<nbStars;i++){
 		var hue=Math.floor(Math.random()*45+173), sat=Math.floor(Math.random()*10+56),lum=Math.floor(Math.random()*20+80)
 		starsColor = "hsl("+hue+", "+sat+"%, "+lum+"%)"
@@ -34,6 +31,21 @@ function drawStars(can){
 		ctx.fillRect(x,y,l,l);		
 
 	}
+	
+
+	
+
+}
+
+function drawTarget(can){
+	var ctx = can.getContext("2d");
+
+	var initialWidth = can.width/12;
+	var gap = ((can.width-initialWidth)/2)/10
+
+	var maxHeight = can.height;
+	var maxWidth = can.width;
+
 	ctx.fillStyle = "#ffffff";
 
 	var scale = 0.35;
@@ -49,17 +61,28 @@ function drawStars(can){
 		ctx.closePath();
 		ctx.restore();
 	}
-
 }
 
 
 function drawPlanets(can){
 	var ctx = can.getContext("2d");
-	var size = can.width/30
+	var size = can.width/50
+
+	var initialGap = can.width/12;
+	var gap = ((can.width-initialGap)/2)/10
+
+	var maxHeight = can.height;
+	var maxWidth = can.width;
+
+	var t = 2*Math.PI;
+	var x = (maxWidth/2)+4*Math.cos(t)*size;		// 4=magic number
+	var y = (maxHeight/2)+4*Math.sin(t)*size;		// 4=magic number
+	console.log(maxHeight,maxWidth,x,y);
 
 	ctx.beginPath();
 	ctx.fillStyle = "#FFFFC4";
-	ctx.fillRect((can.width/2)-size/2, (can.height/2)-size/2, size, size);
+	ctx.arc(x, y, size, 0, 2 * Math.PI, false);
+	ctx.fill()
 	ctx.closePath();
 }
 
