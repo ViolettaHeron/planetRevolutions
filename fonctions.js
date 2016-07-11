@@ -4,9 +4,10 @@ function init(){
 	var can = document.getElementById('sky')
 	putSize(can);
 	drawStars(can);
-	drawPlanets(can);
+	//drawPlanets(can);
 	//drawTarget(can);
 	addEvents(can);
+	movePlanets(can);
 }
 
 function putSize(can){
@@ -28,12 +29,9 @@ function drawStars(can){
 		var x=Math.random()*maxWidth, y=Math.random()*maxHeight;
 		var l=Math.random()<0.999?Math.random()*1.5+0.5:Math.random()*3+1;
 
-		ctx.fillRect(x,y,l,l);		
+		ctx.fillRect(x,y,l,l);
 
 	}
-	
-
-	
 
 }
 
@@ -64,7 +62,7 @@ function drawTarget(can){
 }
 
 
-function drawPlanets(can){
+function drawPlanets(can,t){
 	var ctx = can.getContext("2d");
 	var size = can.width/50
 
@@ -74,13 +72,9 @@ function drawPlanets(can){
 	var maxHeight = can.height;
 	var maxWidth = can.width;
 
-	
-
 	for(var i=0;i<9;i++){
-		var x = (maxWidth/2)+(4+i)*Math.cos(t)*size;		// 4=magic number
-		var y = (maxHeight/2)+(4+i)*Math.sin(t)*size;		// 4=magic number
-
-		var t = 2*Math.PI+0.5*i;
+		var x = (maxWidth/2)+(4+2*i)*Math.cos(Math.PI*t+i)*size;		// 4=magic number
+		var y = (maxHeight/2)+(4+2*i)*Math.sin(Math.PI*t+i)*size;		// 4=magic number
 
 		ctx.beginPath();
 		ctx.fillStyle = "#FFFFC4";
@@ -104,3 +98,10 @@ function addEvents(can){
 	, true);
 }
 
+function movePlanets(can){
+	var t=0;
+	setInterval(function(){ 
+		drawPlanets(can,t);
+		t+=0.1;
+	}, 1000);
+}
