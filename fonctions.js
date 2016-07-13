@@ -3,39 +3,57 @@ var planets = [
 	{
 		name:"Mercure",
 		color:"#cc3300",
-		size:1
+		size:1,
+		initialPos:1,
+		speed:4.7
 	},{
 		name:"Venus",
 		color:"#ff9900",
-		size:1.1
+		size:1.1,
+		initialPos:8,
+		speed:3.2
 	},{
 		name:"Terre",
 		color:"#0099cc",
-		size:1.2
+		size:1.2,
+		initialPos:3,
+		speed:2.9
 	},{
 		name:"Mars",
 		color:"#ff3300",
-		size:1
+		size:1,
+		initialPos:4,
+		speed:2.4
 	},{
 		name:"Jupiter",
 		color:"#ffcc66",
-		size:1.5
+		size:1.6,
+		initialPos:2,
+		speed:1.3
 	},{
 		name:"Saturne",
 		color:"#ffff99",
-		size:1.4
+		size:1.4,
+		initialPos:6,
+		speed:0.9
 	},{
 		name:"Uranus",
 		color:"#00ccff",
-		size:1.2
+		size:1.2,
+		initialPos:1,
+		speed:0.6
 	},{
 		name:"Neptune",
 		color:"#33ccff",
-		size:1.1
+		size:1.1,
+		initialPos:7,
+		speed:0.5
 	},{
 		name:"Pluton",
 		color:"#993300",
-		size:0.5
+		size:0.5,
+		initialPos:5,
+		speed:0.4
 	},
 ]
 
@@ -47,7 +65,7 @@ function init(){
 	putSquareSize(p_can);
 	drawStars(can);
 	//drawPlanets(can);
-	//drawTarget(can);
+	//drawTarget(p_can);
 	addEvents(can);
 	movePlanets(p_can);
 }
@@ -98,7 +116,7 @@ function drawTarget(can){
 	ctx.lineWidth = 1;
 	ctx.strokeStyle = 'white';
 
-	for(var i = 0;i<9;i++){
+	for(var i = 0;i<planets.length;i++){
 		ctx.save();
 		ctx.scale(1, scale);
 		ctx.beginPath();
@@ -115,23 +133,22 @@ function drawPlanets(can,t){
 	var size = can.width/65
 
 	var initialGap = can.width/20;
-	var gap = ((can.width-initialGap)/2)/20
+	var gap = ((can.width-initialGap)/2)/10
 
 	var maxHeight = can.height;
 	var maxWidth = can.width;
 
 	ctx.beginPath();
-	ctx.fillStyle = "#ffff99";
+	ctx.fillStyle = "#ffff9a";
 	ctx.arc((maxWidth/2), (maxHeight/2), size, 0, 2 * Math.PI, false);
 	ctx.fill()
 	ctx.closePath();
-
-
+	
 	for(var i=0;i<planets.length;i++){
 
-		speed = planets.length-i+1
-		var x = (maxWidth/2)+(4+2*i)*Math.cos(Math.PI*t*speed)*gap;		// 4=magic number
-		var y = (maxHeight/2)+(4+2*i)*Math.sin(Math.PI*t*speed)*gap;		// 4=magic number
+		speed = (planets.length-i+1)*planets[i].speed/2;
+		var x = (maxWidth/2)+(2+i)*Math.cos(t*speed+planets[i].initialPos)*gap;		// 2 = magic number
+		var y = (maxHeight/2)+(2+i)*Math.sin(t*speed+planets[i].initialPos)*gap;	// 2 = magic number
 
 
 		ctx.beginPath();
@@ -156,11 +173,11 @@ function addEvents(can){
 	, true);
 }
 
-function movePlanets(can){
+function movePlanets(p_can){
 	var t=0;
 	setInterval(function(){ 
-		can.getContext("2d").clearRect(0, 0, can.width, can.height);
-		drawPlanets(can,t);
-		t+=0.0025;
+		p_can.getContext("2d").clearRect(0, 0, p_can.width, p_can.height);
+		drawPlanets(p_can,t);
+		t+=0.005;
 	}, 30);
 }
