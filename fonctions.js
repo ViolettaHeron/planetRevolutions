@@ -66,7 +66,7 @@ function init(){
 	drawStars(can);
 	//drawPlanets(can);
 	//drawTarget(p_can);
-	addEvents(can);
+	addEvents(can,p_can);
 	movePlanets(p_can);
 }
 
@@ -163,12 +163,13 @@ function drawPlanets(can,t){
 /*
 * events
 */
-function addEvents(can){
+function addEvents(can,p_can){
 	window.addEventListener('resize', function(){
 		nbStars = (window.innerHeight/100*window.innerWidth/10);
 		putSize(can);
+		putSquareSize(p_can);
 		drawStars(can);
-		drawPlanets(can);
+		drawPlanets(p_can);
 	}
 	, true);
 }
