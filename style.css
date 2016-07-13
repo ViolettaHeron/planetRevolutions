@@ -6,3 +6,17 @@ body{
 #sky{
 	background-color:#040812;
 }
+
+#planetsPath{
+	position:absolute;
+	top:0;
+	left:0;
+}
+
+.planets{
+	position:absolute;
+	height:15px;
+	width:15px;
+	background-color:#ff0000; 
+	border-radius: 50%
+}
