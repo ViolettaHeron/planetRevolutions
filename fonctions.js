@@ -19,11 +19,11 @@ var planets = [
 	},{
 		name:"Jupiter",
 		color:"#ffcc66",
-		size:2.4
+		size:1.5
 	},{
 		name:"Saturne",
 		color:"#ffff99",
-		size:2
+		size:1.4
 	},{
 		name:"Uranus",
 		color:"#00ccff",
@@ -59,7 +59,6 @@ function putSize(can){
 
 function putSquareSize(can){
 	var l = window.innerHeight>window.innerWidth ? window.innerWidth : window.innerHeight;
-	console.log(l);
 	can.height = l;
 	can.width = l;
 }
@@ -115,19 +114,19 @@ function drawPlanets(can,t){
 	var ctx = can.getContext("2d");
 	var size = can.width/60
 
-	var initialGap = can.width/12;
-	var gap = ((can.width-initialGap)/2)/10
+	var initialGap = can.width/20;
+	var gap = ((can.width-initialGap)/2)/20
 
 	var maxHeight = can.height;
 	var maxWidth = can.width;
 
 	for(var i=0;i<9;i++){
-		var x = (maxWidth/2)+(4+2*i)*Math.cos(Math.PI*t*(i+1))*size;		// 4=magic number
-		var y = (maxHeight/2)+(4+2*i)*Math.sin(Math.PI*t*(i+1))*size;		// 4=magic number
+		var x = (maxWidth/2)+(4+2*i)*Math.cos(Math.PI*t*(i+1))*gap;		// 4=magic number
+		var y = (maxHeight/2)+(4+2*i)*Math.sin(Math.PI*t*(i+1))*gap;		// 4=magic number
 
 		ctx.beginPath();
-		ctx.fillStyle = "#FFFFC4";
-		ctx.arc(x, y, size, 0, 2 * Math.PI, false);
+		ctx.fillStyle = planets[i].color;
+		ctx.arc(x, y, size*planets[i].size, 0, 2 * Math.PI, false);
 		ctx.fill()
 		ctx.closePath();
 	}
@@ -149,9 +148,9 @@ function addEvents(can){
 
 function movePlanets(can){
 	var t=0;
-	setTimeout(function(){ 
+	setInterval(function(){ 
 		can.getContext("2d").clearRect(0, 0, can.width, can.height);
 		drawPlanets(can,t);
-		t+=0.02;
-	}, 100);
+		t+=0.005;
+	}, 50);
 }
