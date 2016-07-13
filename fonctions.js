@@ -147,8 +147,8 @@ function drawPlanets(can,t){
 	for(var i=0;i<planets.length;i++){
 
 		speed = (planets.length-i+1)*planets[i].speed/2;
-		var x = (maxWidth/2)+(2+i)*Math.cos(t*speed+planets[i].initialPos)*gap;		// 2 = magic number
-		var y = (maxHeight/2)+(2+i)*Math.sin(t*speed+planets[i].initialPos)*gap;	// 2 = magic number
+		var x = (maxWidth/2)+Math.cos(t*speed+planets[i].initialPos)*(gap*(2+i));		// 2 = magic number
+		var y = (maxHeight/2)+Math.sin(t*speed+planets[i].initialPos)*(gap*(2+i));	// 2 = magic number
 
 
 		ctx.beginPath();
@@ -156,6 +156,13 @@ function drawPlanets(can,t){
 		ctx.arc(x, y, size*planets[i].size, 0, 2 * Math.PI, false);
 		ctx.fill()
 		ctx.closePath();
+
+		ctx.beginPath();
+		ctx.strokeStyle = planets[i].color;
+		ctx.arc((maxWidth/2), (maxHeight/2), (gap*(2+i)), 0, 2 * Math.PI, false);
+		ctx.stroke()
+		ctx.closePath();
+
 	}
 }
 
